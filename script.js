@@ -32,6 +32,13 @@ resetButton.addEventListener("click", resetAll);
 const gridButton = document.querySelector("#newGrid"); 
 const userGridSize = document.querySelector("#gridSize");
 gridButton.addEventListener("click", ()=>{
-    gridSize = +userGridSize.value;
+    if (+userGridSize.value > 100) {
+        alert("You have entered more than max size of 100, using 100 instead!");
+        gridSize = 100;
+        userGridSize.value = gridSize;
+    }
+    else {
+        gridSize = +userGridSize.value;
+    }
     createGrid();
 })

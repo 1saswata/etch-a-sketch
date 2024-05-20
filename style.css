@@ -10,7 +10,9 @@
     flex: 1 0 auto;
 }
 .cell {
-    border: 1px solid black;
     flex: 1 0 auto;
     aspect-ratio: 1 / 1;
+}
+.sketched {
+    background-color: aqua;
 }

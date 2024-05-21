@@ -7,8 +7,13 @@
     <script src="./script.js" defer></script>
 </head>
 <body>
-    <input type="number" id="gridSize" placeholder="Max 100" value = "16">
+    <input type="number" id="gridSize" placeholder="Max 100" value = "40">
     <button id="newGrid">Change Grid</button>
+    <select name="mode" id="mode">
+        <option value="0" selected="selected">Normal</option>
+        <option value="1">RGB</option>
+        <option value="2">Opacity</option>
+    </select>
     <div class="container"></div>
     <button id="reset">Reset</button>
 </body>

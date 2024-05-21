@@ -1,5 +1,6 @@
-let sketch = 0;
-let gridSize = 16;
+let isSketch = 0;
+let gridSize = 40;
+let mode = 0;
 const container = document.querySelector(".container");
 function createGrid() {
     rows = document.querySelectorAll(".row");
@@ -11,17 +12,33 @@ function createGrid() {
             newDiv = document.createElement("div");
             newDiv.classList.add("cell");     
             newRow.appendChild(newDiv);
-            newDiv.addEventListener("mouseenter", (e) => {
-                if(sketch === 1)
-                    e.target.classList.add("sketched");
-            })   
+            newDiv.addEventListener("mouseenter", (e) => sketch(e.target));   
         }
         container.appendChild(newRow);
     }
 }
 
+function sketch(element) {
+    if(isSketch === 1) {
+        switch (mode) {
+            case 0:
+                element.classList.add("sketched");
+                break;
+            case 1:
+                element.style["background-color"] = 
+                `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
+                break;
+            case 2:
+                element.style["background-color"] = "black";
+                if(+element.style.opacity !== 1){
+                    element.style.opacity = .1 + +element.style.opacity;
+                }
+                break;
+        }
+    }
+}
 createGrid();
-container.addEventListener("click", ()=>sketch = (sketch + 1)%2);
+container.addEventListener("click", ()=>isSketch = (isSketch + 1)%2);
 function resetAll () {
     const cells = document.querySelectorAll(".cell");
     cells.forEach(cell => cell.classList.remove("sketched"));
@@ -41,4 +58,11 @@ gridButton.addEventListener("click", ()=>{
         gridSize = +userGridSize.value;
     }
     createGrid();
-})
+}) 
+
+const modeSelect = document.querySelector("#mode");
+modeSelect.addEventListener("change", (e)=>{
+    resetAll();
+    mode = +e.target.value;
+});
+

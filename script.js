@@ -39,12 +39,8 @@ function sketch(element) {
 }
 createGrid();
 container.addEventListener("click", ()=>isSketch = (isSketch + 1)%2);
-function resetAll () {
-    const cells = document.querySelectorAll(".cell");
-    cells.forEach(cell => cell.classList.remove("sketched"));
-}
 const resetButton = document.querySelector("#reset");
-resetButton.addEventListener("click", resetAll);
+resetButton.addEventListener("click", createGrid);
 
 const gridButton = document.querySelector("#newGrid"); 
 const userGridSize = document.querySelector("#gridSize");
@@ -62,7 +58,7 @@ gridButton.addEventListener("click", ()=>{
 
 const modeSelect = document.querySelector("#mode");
 modeSelect.addEventListener("change", (e)=>{
-    resetAll();
+    createGrid();
     mode = +e.target.value;
 });
 
